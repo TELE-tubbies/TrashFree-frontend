@@ -42,7 +42,7 @@ class LoginPopup extends StatelessWidget {
           const SizedBox(height: 20),
           CustomButton(
             text: 'Login',
-            onPressed: () => controller.login(loginFormKey),
+            onPressed: () => controller.login(context, loginFormKey),
           ),
           Padding(
             padding: EdgeInsets.only(

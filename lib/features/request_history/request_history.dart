@@ -16,6 +16,7 @@ class RequestHistory extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: deviceHeight * 0.03),
                 const TextTitle(
                   text: 'Request History',
                   fontSize: 20,
@@ -23,26 +24,30 @@ class RequestHistory extends StatelessWidget {
                 SizedBox(height: deviceHeight * 0.03),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                          tileColor: secondaryColor,
-                          title: TextTitle(
-                            text: 'Request ID No $index',
-                            fontSize: 17,
-                            textAlign: TextAlign.left,
-                          ),
-                          subtitle: Text('Request ID No $index'),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.arrow_forward_ios),
-                            iconSize: 20,
-                            onPressed: () {},
-                          )),
-                      SizedBox(height: deviceHeight * 0.012)
-                    ],
-                  ),
-                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            tileColor: secondaryColor,
+                            title: const TextTitle(
+                              text: 'Request ID No 123456',
+                              fontSize: 17,
+                              textAlign: TextAlign.left,
+                            ),
+                            subtitle: const Text('Nov 11. 2022'),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.arrow_forward_ios),
+                              iconSize: 20,
+                              onPressed: () {},
+                            )),
+                        SizedBox(height: deviceHeight * 0.012)
+                      ],
+                    );
+                  },
+                  itemCount: 2,
                   shrinkWrap: true,
                 )
               ],

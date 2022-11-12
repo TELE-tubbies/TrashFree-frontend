@@ -6,16 +6,15 @@ import '../../constants/dimensions.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final Function()? onPressed;
-  const CustomButton({
-    Key? key,
-    required this.text,
-    this.onPressed,
-  }) : super(key: key);
+  final Color? color;
+  const CustomButton({Key? key, required this.text, this.onPressed, this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
+            backgroundColor: color,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
             minimumSize: Size(deviceWidth, 50)),

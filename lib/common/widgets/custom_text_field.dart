@@ -28,6 +28,7 @@ class CustomTextField extends StatelessWidget {
         validator: (value) =>
             value!.isEmpty ? '$labelText is a required field' : null,
         decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
             filled: true,
             fillColor: const Color(0xFF0D1321).withOpacity(0.05),
             prefixIcon: Icon(prefixIcon),

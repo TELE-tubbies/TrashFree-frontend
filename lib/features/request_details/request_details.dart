@@ -110,7 +110,7 @@ class RequestDetails extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
-                        TextTitle(text: 'Request Info', fontSize: 20),
+                        TextTitle(text: 'Total Price', fontSize: 20),
                         TextSubtitle(text: 'Rs 120', color: primaryColor)
                       ],
                     ),
@@ -131,7 +131,11 @@ class RequestDetails extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    CustomButton(text: 'Pay Now', onPressed: () {}),
+                    CustomButton(
+                      text: 'Cancel Request',
+                      onPressed: () {},
+                      color: Colors.red,
+                    ),
                     SizedBox(height: deviceHeight * 0.04),
                   ])),
             ),

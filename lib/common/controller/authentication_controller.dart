@@ -11,6 +11,9 @@ class AuthenticationController extends GetxController {
   final TextEditingController usernameTextController = TextEditingController();
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController nameTextController = TextEditingController();
+  final TextEditingController phoneNumberTextController =
+      TextEditingController();
 
   final TextEditingController emailLoginController = TextEditingController();
   final TextEditingController passwordLoginController = TextEditingController();
@@ -19,7 +22,8 @@ class AuthenticationController extends GetxController {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  void login(GlobalKey<FormState> formKey) async {
+  void login(BuildContext context, GlobalKey<FormState> formKey) async {
+    if (!_validateEmail(emailLoginController.text, context: context)) return;
     if (formKey.currentState!.validate()) {
       final Map<String, String> body = {
         "email": emailLoginController.text,
@@ -34,7 +38,7 @@ class AuthenticationController extends GetxController {
         if (response.statusCode == 200) {
           CustomSnackBars.showSuccessSnackBar(Get.context!, "Login Successful");
           clearLoginController();
-          Get.offAndToNamed('/navigation_bar');
+          Get.offAllNamed('/navigation_bar');
         } else {
           CustomSnackBars.showErrorSnackBar(
               'Login Failed', jsonResponse['message']);
@@ -47,25 +51,29 @@ class AuthenticationController extends GetxController {
     }
   }
 
-  void register(GlobalKey<FormState> formKey) async {
+  void register(BuildContext context, GlobalKey<FormState> formKey) async {
+    if (!_validateEmail(emailTextController.text, context: context)) return;
     if (formKey.currentState!.validate()) {
       final Map<String, String> body = {
         "username": usernameTextController.text,
         "email": emailTextController.text,
-        "password": passwordTextController.text
+        "password": passwordTextController.text,
+        "name": nameTextController.text,
+        "phone_number": phoneNumberTextController.text
       };
 
       http.Response response;
       try {
         response = await http.post(Uri.parse(Api.register),
             headers: header, body: jsonEncode(body));
+
         var jsonResponse = jsonDecode(response.body);
         if (response.statusCode == 200) {
           CustomSnackBars.showSuccessSnackBar(
               Get.context!, "Registered Successfully",
               showConfetti: true);
           clearRegisterController();
-          Get.offAndToNamed('/homescreen');
+          Get.offAllNamed('/navigation_bar');
         } else {
           CustomSnackBars.showErrorSnackBar(
               'Register Failed', jsonResponse['message']);
@@ -78,6 +86,18 @@ class AuthenticationController extends GetxController {
     }
   }
 
+  bool _validateEmail(String value, {required BuildContext context}) {
+    String pattern =
+        r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      CustomSnackBars.showErrorSnackBar(
+          'Request Failed', 'Please enter a valid email address');
+      return false;
+    }
+    return true;
+  }
+
   void clearLoginController() {
     emailLoginController.clear();
     passwordLoginController.clear();
@@ -87,6 +107,8 @@ class AuthenticationController extends GetxController {
     usernameTextController.clear();
     emailTextController.clear();
     passwordTextController.clear();
+    nameTextController.clear();
+    phoneNumberTextController.clear();
   }
 
   @override
@@ -94,6 +116,8 @@ class AuthenticationController extends GetxController {
     usernameTextController.dispose();
     emailTextController.dispose();
     passwordTextController.dispose();
+    nameTextController.dispose();
+    phoneNumberTextController.dispose();
     super.onClose();
   }
 }

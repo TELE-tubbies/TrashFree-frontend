@@ -25,7 +25,7 @@ class RegisterPage extends StatelessWidget {
           height: deviceHeight,
           child: Column(children: [
             Container(
-                height: deviceHeight * 0.2,
+                height: deviceHeight * 0.16,
                 margin: EdgeInsets.only(
                     top: deviceHeight * 0.1, bottom: deviceHeight * 0.04),
                 child: Image.asset('assets/images/register.png')),
@@ -41,9 +41,17 @@ class RegisterPage extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomTextField(
-                        prefixIcon: Icons.edit_outlined,
+                        prefixIcon: Icons.person,
                         labelText: 'Username',
                         controller: controller.usernameTextController),
+                    CustomTextField(
+                        prefixIcon: Icons.edit_outlined,
+                        labelText: 'Name',
+                        controller: controller.nameTextController),
+                    CustomTextField(
+                        prefixIcon: Icons.phone,
+                        labelText: 'Phone Number',
+                        controller: controller.phoneNumberTextController),
                     CustomTextField(
                         prefixIcon: Icons.email_outlined,
                         labelText: 'Email',
@@ -57,12 +65,13 @@ class RegisterPage extends StatelessWidget {
                 )),
             SizedBox(height: deviceHeight * 0.02),
             CustomButton(
-                text: 'Sign Up', onPressed: () => controller.register(formKey)),
-            const Spacer(),
+                text: 'Sign Up',
+                onPressed: () => controller.register(context, formKey)),
+            SizedBox(height: deviceHeight * 0.05),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Already a member?'),
+                const Text('Already have an account?'),
                 TextButton(
                     child: const Text('Log In'),
                     onPressed: () => showModalBottomSheet(
@@ -71,7 +80,7 @@ class RegisterPage extends StatelessWidget {
                         context: context,
                         builder: (context) =>
                             LoginPopup(controller: controller))),
-                SizedBox(height: deviceHeight * 0.1)
+                SizedBox(height: deviceHeight * 0.01)
               ],
             )
           ]),
