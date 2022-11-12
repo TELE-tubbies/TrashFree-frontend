@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:trashfree/features/register/register.dart';
 import 'package:trashfree/constants/color_constants.dart';
 import 'package:trashfree/features/request_details/request_details.dart';
+import 'package:trashfree/features/splash_screen/splash_screen.dart';
+import 'package:trashfree/features/story_onboarding/story_onboarding.dart';
 
 import 'features/navigation_bar/navigation_bar.dart';
+import 'features/profile/profile.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize hiveDB
+  await Hive.initFlutter();
+  await Hive.openBox('SETTINGS');
+  await Hive.openBox('USER_DATA');
+
   runApp(const MyApp());
 }
 
@@ -51,11 +61,15 @@ class MyApp extends StatelessWidget {
             dividerColor: Colors.grey,
             bottomSheetTheme:
                 const BottomSheetThemeData(backgroundColor: white)),
-        initialRoute: '/',
+        initialRoute: '/splash_screen',
         getPages: [
-          GetPage(name: '/', page: () => const RegisterPage()),
+          GetPage(name: '/splash_screen', page: () => const SplashScreen()),
+          GetPage(
+              name: '/story_onboarding', page: () => const OnboardingPage()),
+          GetPage(name: '/register_page', page: () => const RegisterPage()),
           GetPage(name: '/navigation_bar', page: () => NavBar()),
           GetPage(name: '/request_details', page: () => const RequestDetails()),
+          GetPage(name: '/profile', page: () => const Profile()),
         ]);
   }
 }

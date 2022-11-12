@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:trashfree/constants/dimensions.dart';
 
 import '../homescreen/homescreen.dart';
+import '../profile/profile.dart';
+import '../request_history/request_history.dart';
+import '../request_page/request_page.dart';
 
 class NavBarController extends GetxController {
   final _selectedIndex = 0.obs;
@@ -11,26 +14,14 @@ class NavBarController extends GetxController {
 
   final List<Widget> _pages = [
     const Homescreen(),
-    Container(
-      color: Colors.blue,
-      height: deviceHeight,
-      width: deviceWidth,
-    ),
-    Container(
-      color: Colors.green,
-      height: deviceHeight,
-      width: deviceWidth,
-    ),
-    Container(
-      color: Colors.purple,
-      height: deviceHeight,
-      width: deviceWidth,
-    ),
+    const RequestHistory(),
+    const RequestPage(),
     Container(
       color: Colors.yellow,
       height: deviceHeight,
       width: deviceWidth,
     ),
+    const Profile(),
   ];
 
   List<Widget> get pages => _pages;

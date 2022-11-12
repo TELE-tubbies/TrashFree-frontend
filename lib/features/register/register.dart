@@ -15,9 +15,6 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    deviceHeight = MediaQuery.of(context).size.height;
-    deviceWidth = MediaQuery.of(context).size.width;
-
     final AuthenticationController controller =
         Get.put(AuthenticationController());
 
@@ -33,7 +30,11 @@ class RegisterPage extends StatelessWidget {
                     top: deviceHeight * 0.1, bottom: deviceHeight * 0.04),
                 child: Image.asset('assets/images/register.png')),
             SizedBox(
-                width: deviceWidth, child: const TextTitle(text: "Sign Up")),
+                width: deviceWidth,
+                child: const TextTitle(
+                  text: "Sign Up",
+                  textAlign: TextAlign.left,
+                )),
             SizedBox(height: deviceHeight * 0.02),
             Form(
                 key: formKey,

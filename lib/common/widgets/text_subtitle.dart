@@ -5,12 +5,14 @@ class TextSubtitle extends StatelessWidget {
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final TextAlign? textAlign;
   const TextSubtitle(
       {Key? key,
       required this.text,
       this.color,
       this.fontSize = 18,
-      this.fontWeight = FontWeight.w600})
+      this.fontWeight = FontWeight.w600,
+      this.textAlign})
       : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class TextSubtitle extends StatelessWidget {
       text,
       style:
           TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
+      textAlign: textAlign,
     );
   }
 }

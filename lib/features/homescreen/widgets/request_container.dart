@@ -17,7 +17,7 @@ class RequestContainer extends StatelessWidget {
         height: deviceHeight * 0.24,
         margin: EdgeInsets.only(top: deviceHeight * 0.02),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: const Color(0xffDFDFDF)),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(

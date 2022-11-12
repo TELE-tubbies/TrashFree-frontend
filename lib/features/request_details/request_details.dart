@@ -16,12 +16,16 @@ class RequestDetails extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const TextSubtitle(
-            text: 'Live Tracker',
-            color: Colors.red,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
+          title: Row(children: [
+            SizedBox(width: deviceWidth * 0.09),
+            Image.asset('assets/images/live_tracking.png'),
+            SizedBox(width: deviceWidth * 0.02),
+            const TextSubtitle(
+                text: 'Live Tracker',
+                color: Colors.red,
+                fontSize: 22,
+                fontWeight: FontWeight.w600),
+          ]),
           centerTitle: true,
           elevation: 0,
           actions: [

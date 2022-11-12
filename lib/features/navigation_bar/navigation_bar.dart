@@ -58,8 +58,8 @@ class NavBar extends StatelessWidget {
                     BottomNavigationBarItem(
                         icon: Icon(
                           _navBarController.selectedIndex == 3
-                              ? Icons.calendar_month
-                              : Icons.calendar_month_outlined,
+                              ? Icons.camera
+                              : Icons.camera_outlined,
                         ),
                         label: "Scan"),
                     BottomNavigationBarItem(
