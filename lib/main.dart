@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:trashfree/features/register/register.dart';
+import 'package:trashfree/features/admin/dashboard/dashboard.dart';
+import 'package:trashfree/features/individual/register/register.dart';
 import 'package:trashfree/constants/color_constants.dart';
-import 'package:trashfree/features/request_details/request_details.dart';
-import 'package:trashfree/features/splash_screen/splash_screen.dart';
-import 'package:trashfree/features/story_onboarding/story_onboarding.dart';
+import 'package:trashfree/features/individual/request_details/request_details.dart';
+import 'package:trashfree/features/individual/shopping_page/item_details.dart';
+import 'package:trashfree/features/common/splash_screen/splash_screen.dart';
+import 'package:trashfree/features/common/story_onboarding/story_onboarding.dart';
 
-import 'features/navigation_bar/navigation_bar.dart';
-import 'features/profile/profile.dart';
+import 'features/individual/navigation_bar/navigation_bar.dart';
+import 'features/individual/profile/profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +71,9 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/register_page', page: () => const RegisterPage()),
           GetPage(name: '/navigation_bar', page: () => NavBar()),
           GetPage(name: '/request_details', page: () => const RequestDetails()),
+          GetPage(name: '/item_details', page: () => const ItemDetails()),
           GetPage(name: '/profile', page: () => const Profile()),
+          GetPage(name: '/admin_dashboard', page: () => const AdminDashboard()),
         ]);
   }
 }

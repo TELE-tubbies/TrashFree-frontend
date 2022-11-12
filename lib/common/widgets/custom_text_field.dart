@@ -8,14 +8,16 @@ class CustomTextField extends StatelessWidget {
   final IconData? suffixIcon;
   final bool obscureText;
   final TextEditingController controller;
-  const CustomTextField({
-    Key? key,
-    required this.labelText,
-    required this.prefixIcon,
-    this.suffixIcon,
-    required this.controller,
-    this.obscureText = false,
-  }) : super(key: key);
+  final void Function()? onPressed;
+  const CustomTextField(
+      {Key? key,
+      required this.labelText,
+      required this.prefixIcon,
+      this.suffixIcon,
+      required this.controller,
+      this.obscureText = false,
+      this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,12 @@ class CustomTextField extends StatelessWidget {
             filled: true,
             fillColor: const Color(0xFF0D1321).withOpacity(0.05),
             prefixIcon: Icon(prefixIcon),
-            suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
+            suffixIcon: suffixIcon != null
+                ? IconButton(
+                    icon: Icon(suffixIcon),
+                    onPressed: onPressed,
+                  )
+                : null,
             border: InputBorder.none,
             labelText: 'Enter your ${labelText.toLowerCase()}'),
       ),

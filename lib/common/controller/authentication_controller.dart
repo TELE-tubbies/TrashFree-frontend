@@ -8,6 +8,9 @@ import '../../constants/api_constants.dart';
 import '../widgets/custom_snackbar.dart';
 
 class AuthenticationController extends GetxController {
+  RxBool obsecureLoginPassword = true.obs;
+  RxBool obsecureRegisterPassword = true.obs;
+
   final TextEditingController usernameTextController = TextEditingController();
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
@@ -38,7 +41,11 @@ class AuthenticationController extends GetxController {
         if (response.statusCode == 200) {
           CustomSnackBars.showSuccessSnackBar(Get.context!, "Login Successful");
           clearLoginController();
-          Get.offAllNamed('/navigation_bar');
+          if (jsonResponse['user']['role'] == 'admin') {
+            Get.offAllNamed('/admin_dashboard');
+          } else {
+            Get.offAllNamed('/navigation_bar');
+          }
         } else {
           CustomSnackBars.showErrorSnackBar(
               'Login Failed', jsonResponse['message']);
