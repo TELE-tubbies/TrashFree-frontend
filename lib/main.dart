@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:trashfree/features/admin/dashboard/dashboard.dart';
+import 'package:trashfree/features/admin/events/events.dart';
+import 'package:trashfree/features/admin/navigation_bar/admin_navigation_bar.dart';
 import 'package:trashfree/features/individual/register/register.dart';
 import 'package:trashfree/constants/color_constants.dart';
 import 'package:trashfree/features/individual/request_details/request_details.dart';
@@ -73,7 +74,8 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/request_details', page: () => const RequestDetails()),
           GetPage(name: '/item_details', page: () => const ItemDetails()),
           GetPage(name: '/profile', page: () => const Profile()),
-          GetPage(name: '/admin_dashboard', page: () => const AdminDashboard()),
+          GetPage(name: '/admin_navigation_bar', page: () => AdminNavBar()),
+          GetPage(name: '/create_event', page: () => const Events()),
         ]);
   }
 }

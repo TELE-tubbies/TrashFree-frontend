@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:trashfree/common/widgets/custom_button.dart';
+import 'package:trashfree/common/widgets/custom_text_field.dart';
 import 'package:trashfree/common/widgets/text_subtitle.dart';
 import 'package:trashfree/common/widgets/text_title.dart';
 import 'package:trashfree/constants/color_constants.dart';
@@ -9,7 +10,6 @@ import 'package:trashfree/constants/dimensions.dart';
 import 'package:trashfree/features/individual/request_page/request_page_controller.dart';
 
 import 'widgets/build_button.dart';
-import 'widgets/secondary_custom_button.dart';
 
 class RequestPage extends StatelessWidget {
   const RequestPage({super.key});
@@ -84,22 +84,24 @@ class RequestPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: deviceHeight * 0.01),
-              SecondaryCustomButton(
-                text: 'Set a pickup location',
-                onPressed: () {},
-              ),
+              CustomTextField(
+                  labelText: 'Location',
+                  prefixIcon: Icons.location_on,
+                  controller: controller.locationTextController),
               Container(
                 width: deviceWidth,
                 padding: EdgeInsets.symmetric(
                     horizontal: deviceWidth * 0.05,
-                    vertical: deviceHeight * 0.02),
+                    vertical: deviceHeight * 0.01),
                 child: const TextTitle(
-                  text: 'Approx Price: Rs 30',
+                  text: 'Approx Price: Rs XX',
                   fontSize: 16,
                   color: primaryColor,
                 ),
               ),
-              CustomButton(text: 'Request', onPressed: () {}),
+              CustomButton(
+                  text: 'Request Pickup',
+                  onPressed: () => controller.postRequest()),
               SizedBox(height: deviceHeight * 0.02),
               const TextTitle(
                 text:

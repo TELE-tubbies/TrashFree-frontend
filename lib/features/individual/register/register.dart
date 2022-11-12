@@ -45,10 +45,6 @@ class RegisterPage extends StatelessWidget {
                         labelText: 'Username',
                         controller: controller.usernameTextController),
                     CustomTextField(
-                        prefixIcon: Icons.edit_outlined,
-                        labelText: 'Name',
-                        controller: controller.nameTextController),
-                    CustomTextField(
                         prefixIcon: Icons.phone,
                         labelText: 'Phone Number',
                         controller: controller.phoneNumberTextController),

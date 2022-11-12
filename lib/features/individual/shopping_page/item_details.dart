@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trashfree/common/widgets/custom_button.dart';
 import 'package:trashfree/common/widgets/text_title.dart';
 import 'package:trashfree/constants/color_constants.dart';
 import 'package:trashfree/constants/dimensions.dart';

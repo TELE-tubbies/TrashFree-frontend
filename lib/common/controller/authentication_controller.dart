@@ -42,7 +42,7 @@ class AuthenticationController extends GetxController {
           CustomSnackBars.showSuccessSnackBar(Get.context!, "Login Successful");
           clearLoginController();
           if (jsonResponse['user']['role'] == 'admin') {
-            Get.offAllNamed('/admin_dashboard');
+            Get.offAllNamed('/admin_navigation_bar');
           } else {
             Get.offAllNamed('/navigation_bar');
           }
