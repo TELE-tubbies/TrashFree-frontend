@@ -1,5 +1,5 @@
 class Api {
-  static String baseApi = "http://localhost:3500/";
+  static String baseApi = "https://trash-free.herokuapp.com/";
 
   // Authentication
   static String auth = "${baseApi}api/auth/";
