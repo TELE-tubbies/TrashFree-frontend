@@ -30,90 +30,96 @@ class RequestPage extends StatelessWidget {
         title: const TextSubtitle(text: 'Make a request', fontSize: 22),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const TextTitle(text: 'Request Info', fontSize: 18),
-              SizedBox(height: deviceHeight * 0.02),
-              Row(children: [
-                Obx(() => RowInfo(
-                      title: 'Date: ',
-                      value: DateFormat('MMM dd, yyyy')
-                          .format(controller.selectedDate.value!),
-                      onTap: () => controller.selectDate(context),
-                    )),
-                SizedBox(width: deviceWidth * .06),
-                Obx(
-                  () => RowInfo(
-                    title: 'Pickup time: ',
-                    value: controller.selectedTime.value!.format(context),
-                    onTap: () => controller.selectTime(context),
-                  ),
+          child: Obx(
+        () => controller.isLoading.value
+            ? SizedBox(
+                height: deviceHeight * 0.9,
+                child: const Center(child: CircularProgressIndicator()))
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TextTitle(text: 'Request Info', fontSize: 18),
+                    SizedBox(height: deviceHeight * 0.02),
+                    Row(children: [
+                      Obx(() => RowInfo(
+                            title: 'Date: ',
+                            value: DateFormat('MMM dd, yyyy')
+                                .format(controller.selectedDate.value!),
+                            onTap: () => controller.selectDate(context),
+                          )),
+                      SizedBox(width: deviceWidth * .06),
+                      Obx(
+                        () => RowInfo(
+                          title: 'Pickup time: ',
+                          value: controller.selectedTime.value!.format(context),
+                          onTap: () => controller.selectTime(context),
+                        ),
+                      ),
+                    ]),
+                    SizedBox(height: deviceHeight * 0.03),
+                    const TextTitle(text: 'Waste Type', fontSize: 18),
+                    SizedBox(height: deviceHeight * 0.02),
+                    GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 4,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 16 / 11,
+                            crossAxisSpacing:
+                                MediaQuery.of(context).size.width * 0.04,
+                            mainAxisSpacing:
+                                MediaQuery.of(context).size.height * 0.01),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Obx(() => buildButton(buttons[index]['label'],
+                              buttons[index]['icon_path'], index));
+                        }),
+                    SizedBox(height: deviceHeight * 0.01),
+                    Row(
+                      children: [
+                        Obx(() => Checkbox(
+                            value: controller.isCheckboxSelected.value,
+                            onChanged: (value) =>
+                                controller.setCheckbox(value!))),
+                        const TextTitle(
+                            text: 'I don\'t know',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                      ],
+                    ),
+                    SizedBox(height: deviceHeight * 0.01),
+                    CustomTextField(
+                        labelText: 'Location',
+                        prefixIcon: Icons.location_on,
+                        controller: controller.locationTextController),
+                    Container(
+                      width: deviceWidth,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: deviceWidth * 0.05,
+                          vertical: deviceHeight * 0.01),
+                      child: const TextTitle(
+                        text: 'Approx Price: Rs XX',
+                        fontSize: 16,
+                        color: primaryColor,
+                      ),
+                    ),
+                    CustomButton(
+                        text: 'Request Pickup',
+                        onPressed: () => controller.postRequest()),
+                    SizedBox(height: deviceHeight * 0.02),
+                    const TextTitle(
+                      text:
+                          'Disclaimer: Above mentioned price is just an estimate. The final price will be decided by the vendor.',
+                      fontSize: 12,
+                      color: Colors.grey,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
                 ),
-              ]),
-              SizedBox(height: deviceHeight * 0.03),
-              const TextTitle(text: 'Waste Type', fontSize: 18),
-              SizedBox(height: deviceHeight * 0.02),
-              GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 16 / 11,
-                      crossAxisSpacing:
-                          MediaQuery.of(context).size.width * 0.04,
-                      mainAxisSpacing:
-                          MediaQuery.of(context).size.height * 0.01),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Obx(() => buildButton(buttons[index]['label'],
-                        buttons[index]['icon_path'], index));
-                  }),
-              SizedBox(height: deviceHeight * 0.01),
-              Row(
-                children: [
-                  Obx(() => Checkbox(
-                      value: controller.isCheckboxSelected.value,
-                      onChanged: (value) => controller.setCheckbox(value!))),
-                  const TextTitle(
-                      text: 'I don\'t know',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400),
-                ],
               ),
-              SizedBox(height: deviceHeight * 0.01),
-              CustomTextField(
-                  labelText: 'Location',
-                  prefixIcon: Icons.location_on,
-                  controller: controller.locationTextController),
-              Container(
-                width: deviceWidth,
-                padding: EdgeInsets.symmetric(
-                    horizontal: deviceWidth * 0.05,
-                    vertical: deviceHeight * 0.01),
-                child: const TextTitle(
-                  text: 'Approx Price: Rs XX',
-                  fontSize: 16,
-                  color: primaryColor,
-                ),
-              ),
-              CustomButton(
-                  text: 'Request Pickup',
-                  onPressed: () => controller.postRequest()),
-              SizedBox(height: deviceHeight * 0.02),
-              const TextTitle(
-                text:
-                    'Disclaimer: Above mentioned price is just an estimate. The final price will be decided by the vendor.',
-                fontSize: 12,
-                color: Colors.grey,
-                textAlign: TextAlign.left,
-              ),
-            ],
-          ),
-        ),
-      ),
+      )),
     );
   }
 }

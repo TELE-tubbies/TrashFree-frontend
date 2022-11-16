@@ -70,8 +70,8 @@ class RequestContainer extends StatelessWidget {
                         valueText: 'Truck Ba 2 Kha',
                       ),
                       const RequestText(
-                        keyText: 'Pickup Location:: ',
-                        valueText: 'Minbhawan Marg, Kathmandu 44600',
+                        keyText: 'Pickup Location: ',
+                        valueText: 'Minbhawan Marg',
                       ),
                     ],
                   ),

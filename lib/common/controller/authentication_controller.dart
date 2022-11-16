@@ -8,6 +8,9 @@ import '../../constants/api_constants.dart';
 import '../widgets/custom_snackbar.dart';
 
 class AuthenticationController extends GetxController {
+  RxBool isLoginLoading = false.obs;
+  RxBool isRegisterLoading = false.obs;
+
   RxBool obsecureLoginPassword = true.obs;
   RxBool obsecureRegisterPassword = true.obs;
 
@@ -35,8 +38,10 @@ class AuthenticationController extends GetxController {
 
       http.Response response;
       try {
+        isLoginLoading.value = true;
         response = await http.post(Uri.parse(Api.login),
             headers: header, body: jsonEncode(body));
+        isLoginLoading.value = false;
         var jsonResponse = jsonDecode(response.body);
         if (response.statusCode == 200) {
           CustomSnackBars.showSuccessSnackBar(Get.context!, "Login Successful");
@@ -71,8 +76,10 @@ class AuthenticationController extends GetxController {
 
       http.Response response;
       try {
+        isRegisterLoading.value = true;
         response = await http.post(Uri.parse(Api.register),
             headers: header, body: jsonEncode(body));
+        isRegisterLoading.value = false;
 
         var jsonResponse = jsonDecode(response.body);
         if (response.statusCode == 200) {

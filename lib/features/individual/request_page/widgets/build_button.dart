@@ -22,7 +22,7 @@ Widget buildButton(String text, String iconPath, int index) {
         SizedBox(height: deviceHeight * 0.02),
         TextSubtitle(
             text: text,
-            fontSize: 14,
+            fontSize: 13,
             color: controller.fontColor(text),
             fontWeight: FontWeight.w500),
       ],

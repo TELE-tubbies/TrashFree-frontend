@@ -14,6 +14,8 @@ class RequestPageController extends GetxController {
   Rx<TimeOfDay?> selectedTime = TimeOfDay.now().obs;
   final TextEditingController locationTextController = TextEditingController();
 
+  RxBool isLoading = false.obs;
+
   setCategoryIndex(String i) {
     if (isCheckboxSelected.value) return;
     if (selectedCategory.contains(i)) {
@@ -56,6 +58,7 @@ class RequestPageController extends GetxController {
   void postRequest() async {
     final wasteType =
         isCheckboxSelected.value ? ['I dont know'] : selectedCategory;
+    isLoading.value = true;
     final response = await http.post(Uri.parse(Api.postRequest),
         headers: {
           'Content-Type': 'application/json',
@@ -67,6 +70,8 @@ class RequestPageController extends GetxController {
           'location': locationTextController.text,
         }));
     var jsonResponse = json.decode(response.body);
+    isLoading.value = false;
+
     try {
       if (response.statusCode == 200) {
         clear();
